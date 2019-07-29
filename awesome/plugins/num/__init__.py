@@ -2,6 +2,14 @@ from awesome.plugins.num.number import search
 from nonebot import on_command, CommandSession
 # on_command 装饰器将函数声明为一个命令处理器
 # 这里为命令的名字，同时允许使用别名
+
+
+__plugin_name__ = '查学号'
+__plugin_usage__ = r'''
+xh 姓名
+'''
+
+
 @on_command('xh', aliases=('学号','查学号'))
 async def xh(session: CommandSession):
     # 从会话状态（session.state）中获取name，如果当前不存在，则询问用户

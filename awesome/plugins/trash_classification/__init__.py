@@ -2,6 +2,11 @@ from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 from .trash_api import get_the_sort_of_trash, participle
 
+__plugin_name__ = '垃圾分类'
+__plugin_usage__ = r'''
+xx是什么垃圾
+XX属于什么垃圾
+'''
 
 @on_command('refuse_classification', aliases={'是什么垃圾', '属于什么垃圾'})
 async def refuse_classification(session: CommandSession):

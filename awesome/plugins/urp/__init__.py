@@ -3,6 +3,11 @@ from awesome.plugins.urp.utils import search, parse
 from nonebot import on_command, CommandSession
 
 
+__plugin_name__ = '查成绩'
+__plugin_usage__ = r'''
+urp 账号 密码
+'''
+
 # on_command 装饰器将函数声明为一个命令处理器
 # 这里为命令的名字，同时允许使用别名
 @on_command('urp', aliases=('成绩', '教务'))

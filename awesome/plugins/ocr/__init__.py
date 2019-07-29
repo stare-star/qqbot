@@ -44,7 +44,7 @@ async def _(session: CommandSession):
     session.state[session.current_key] = session.current_arg_images
 
 
-@on_natural_language(keywords={'png'})  #找到识别图片消息的方法
+@on_natural_language(keywords={'png'})  #等找到识别图片消息的方法
 async def _(session: NLPSession):
     img = session.current_arg_images
     return IntentCommand(90.0, 'ocr', current_arg=img)

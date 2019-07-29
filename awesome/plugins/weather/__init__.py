@@ -2,6 +2,11 @@ from nonebot import on_command, CommandSession, on_natural_language, NLPSession,
 from .getwea import *
 from jieba import posseg
 
+__plugin_name__ = '天气'
+__plugin_usage__ = r'''
+天气 城市
+'''
+
 
 @on_command('weather', aliases=('天气', 'wea'))
 async def weather(session: CommandSession):

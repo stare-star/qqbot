@@ -2,6 +2,11 @@ from nonebot import on_command, CommandSession,logger
 from nonebot.permission import GROUP, PRIVATE
 import random
 
+__plugin_name__ = '掷骰子'
+__plugin_usage__ = r'''
+roll
+1-100
+'''
 
 @on_command('roll', permission=GROUP | PRIVATE, only_to_me=False)
 async def roll(session: CommandSession):
