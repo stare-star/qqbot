@@ -73,7 +73,7 @@ Header2 = {'Host': 'jwurp.hhuc.edu.cn',
            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'}
 
 
-def search(id, passwd):
+async def search(id, passwd):
     count = 1
     while True:
         session = requests.session()  # 建立会话，保持会话信息，cookies

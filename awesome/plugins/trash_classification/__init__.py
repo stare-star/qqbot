@@ -8,6 +8,7 @@ xx是什么垃圾
 XX属于什么垃圾
 '''
 
+
 @on_command('refuse_classification', aliases={'是什么垃圾', '属于什么垃圾'})
 async def refuse_classification(session: CommandSession):
     trash = session.get('trash', prompt='你想查询什么垃圾')

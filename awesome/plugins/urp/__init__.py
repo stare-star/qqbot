@@ -16,9 +16,9 @@ async def urp(session: CommandSession):
     id = session.get('id', prompt='学号')
     passwd = session.get('passwd', prompt='密码')
     course = session.state.get('course')
-
+    await session.send("正在查询中，请稍候~")
     # 查询
-    code, html = search(id, passwd)
+    code, html = await search(id, passwd)
     if code == 200:
 
         res = parse(html)
