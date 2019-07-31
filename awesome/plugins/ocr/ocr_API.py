@@ -1,4 +1,4 @@
-
+import re
 
 from aip import AipOcr
 
@@ -47,6 +47,13 @@ def get_ocr_result_by_url(url):
     res = ocr_url(url)
 
     return res
+
+def getImag(html):                        #传人捕获网页全部数据
+    reg = r'src="(.+?\.jpg)"'
+    imgre = re.compile(reg)
+    url = re.findall(imgre, html)
+    return url
+
 if __name__ == '__main__':
 
     url=r"https://c2cpicdw.qpic.cn/offpic_new/1023256421//b414e9b1-813f-4d50-940a-4ee4372d0002/0?vuin=1513464657&amp;amp;term=2"
