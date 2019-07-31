@@ -9,7 +9,6 @@
 """ 获取B站番剧的今日更新
 """
 import json
-import re
 
 import requests
 from nonebot import CommandSession, on_command
