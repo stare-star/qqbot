@@ -1,7 +1,7 @@
 from nonebot import on_command, CommandSession, on_natural_language, NLPSession, IntentCommand
 from nonebot.command.argfilter.controllers import handle_cancellation
 
-from awesome.plugins.ocr.ocr_API import get_ocr_result, get_ocr_result_by_url
+from awesome.plugins.ocr.ocr_API import get_ocr_result, get_ocr_result_by_url, getImag
 
 
 # on_command 装饰器将函数声明为一个命令处理器
@@ -44,8 +44,16 @@ async def _(session: CommandSession):
     session.state[session.current_key] = session.current_arg_images
 
 
-@on_natural_language(keywords={'png'})
+
+@on_natural_language(keywords=None)
 # todo 等找到识别图片消息的方法
 async def _(session: NLPSession):
-    img = session.current_arg_images
-    return IntentCommand(90.0, 'ocr', current_arg=img)
+    try:
+        img = session.current_arg_images
+        print(img)
+        if img:
+            return IntentCommand(90.0, 'ocr', current_arg=img)
+    except:
+        pass
+
+
