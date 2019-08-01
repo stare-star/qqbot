@@ -28,7 +28,7 @@ async def morning():
     """
     hello_str = get_message()
     yan=getone()
-    out=hello_str+'\n'+yan
+    out=hello_str+'\n\n'+yan
     bot = nonebot.get_bot()
     await bot.send_group_msg(group_id=groupid,
                                  message=out)
