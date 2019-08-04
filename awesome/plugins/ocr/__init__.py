@@ -46,7 +46,6 @@ async def _(session: CommandSession):
 
 
 @on_natural_language(keywords=None)
-# todo 等找到识别图片消息的方法
 async def _(session: NLPSession):
     try:
         img = session.current_arg_images

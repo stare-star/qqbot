@@ -8,7 +8,7 @@
 import nonebot
 
 from awesome.plugins.oneyan import getone
-from config import groupid
+from config import group_id
 
 """ 每日早安插件
 """
@@ -30,7 +30,7 @@ async def morning():
     yan=getone()
     out=hello_str+'\n\n'+yan
     bot = nonebot.get_bot()
-    await bot.send_group_msg(group_id=groupid,
+    await bot.send_group_msg(group_id=group_id,
                                  message=out)
     bot.logger.info('发送早安信息')
 
