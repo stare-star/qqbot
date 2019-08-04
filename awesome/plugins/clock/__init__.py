@@ -13,13 +13,14 @@ from sqlalchemy import func
 import awesome.plugins.clock.Clock
 from awesome.plugins.clock.Clock import session as sql_session
 
-
 __plugin_name__ = '打卡'
 __plugin_usage__ = r'''
 命令格式
 打卡 XXX
 打卡记录
 '''
+
+
 # on_command 装饰器将函数声明为一个命令处理器
 # 这里为命令的名字，同时允许使用别名
 
@@ -34,17 +35,16 @@ async def clock(session: CommandSession):
     if user is None:
         user = Clock.add_user(qq)
     # 验证任务是否存在
-    clock = sql_session.query(Clock.Clock).filter_by(user_id=user.id,name=name).first()
+    clock = sql_session.query(Clock.Clock).filter_by(user_id=user.id, name=name).first()
     if clock is None:
         clock = Clock.add_clock(name=name, user_id=user.id)
 
     Clock.add_clock_record(clock.id, user.id)
+    num = sql_session.query(Clock.ClockRecord).filter_by(clock_id=clock.id).count()
+    # 向用户发送打卡结果
+    await session.send(f"打卡成功 \n {clock.name} 已打卡{num}次")
 
-    # 向用户发送识别结果
-    await session.send("打卡成功")
-
-
-@on_command('my_clock', aliases=('打卡记录',"我的打卡"), only_to_me=False)
+@on_command('my_clock', aliases=('打卡记录', "我的打卡"), only_to_me=False)
 async def my_clock(session: CommandSession):
     # 从会话状态（session.state）中获取图片url（url），如果当前不存在，则询问用户
     # name = session.get('name', prompt='你想打卡什么？')
@@ -55,7 +55,7 @@ async def my_clock(session: CommandSession):
     if user:
         clocks = user.clocks
         num = []
-        last_time=[]
+        last_time = []
         for clock in clocks:
             print(clock.name)
             num.append(sql_session.query(Clock.ClockRecord).filter_by(clock_id=clock.id).count())
@@ -96,6 +96,7 @@ async def _(session: CommandSession):
     # 如果当前正在向用户询问更多信息（例如本例中的要查询的城市），且用户输入有效，则放入会话状态
     session.state[session.current_key] = stripped_arg
 
+
 # @my_clock.args_parser
 # async def _(session: CommandSession):
 #     # 去掉消息首尾的空白符
@@ -130,4 +131,3 @@ async def _(session: NLPSession):
 if __name__ == '__main__':
     import awesome.plugins.clock.Clock
     import awesome.plugins.clock.User
-
