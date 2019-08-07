@@ -129,5 +129,4 @@ async def _(session: NLPSession):
 
 
 if __name__ == '__main__':
-    import awesome.plugins.clock.Clock
-    import awesome.plugins.clock.User
+    pass
