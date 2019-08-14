@@ -11,7 +11,9 @@ import re
 
 import requests
 from nonebot import CommandSession, on_command
-api="http://www.dmoe.cc/random.php?return=json"
+
+api = "http://www.dmoe.cc/random.php?return=json"
+
 
 @on_command('pic', only_to_me=False)
 async def pic(session: CommandSession):
@@ -19,10 +21,9 @@ async def pic(session: CommandSession):
         output = ''
         response = requests.get(api)
         data = (response.json())
-        url=data['imgurl']
+        url = data['imgurl']
 
-
-        img=f"[CQ:image,file={url}]"
+        img = f"[CQ:image,file={url}]"
         print(img)
         # 去掉最后一个\n
         await session.send(img)
@@ -32,6 +33,6 @@ async def pic(session: CommandSession):
 
 if __name__ == '__main__':
     response = requests.get(api)
-    data=(response.json())
+    data = (response.json())
 
     print(data['imgurl'])

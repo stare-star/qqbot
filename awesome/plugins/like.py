@@ -23,7 +23,7 @@ from nonebot import on_command, CommandSession
 IS_LIKE = deque()
 
 
-@on_command('send_like', aliases=['点赞', '赞我'])
+@on_command('send_like', aliases=['点赞', '赞我'],only_to_me=False)
 async def _(session: CommandSession):
     session.ctx['times'] = 10
     await session.bot.send_like(**session.ctx)
