@@ -39,7 +39,12 @@ async def clock(session: CommandSession):
     if clock is None:
         clock = Clock.add_clock(name=name, user_id=user.id)
 
-    Clock.add_clock_record(clock.id, user.id)
+    #   #开头的任务继续添加备注
+    mark='无'
+    if name[:1]=="#":
+        mark = session.get('mark', prompt='请添加备注')
+    Clock.add_clock_record(clock.id, user.id,mark)
+
     num = sql_session.query(Clock.ClockRecord).filter_by(clock_id=clock.id).count()
     # 向用户发送打卡结果
     await session.send(f"打卡成功 \n {clock.name} 已打卡{num}次")
