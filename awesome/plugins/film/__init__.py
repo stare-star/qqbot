@@ -8,11 +8,7 @@
 
 
 from nonebot import on_command, CommandSession, on_natural_language, NLPSession, IntentCommand
-from nonebot.command.argfilter.controllers import handle_cancellation
-from sqlalchemy import func
-
-import awesome.plugins.clock.Clock
-from awesome.plugins.clock.Clock import session as sql_session
+from awesome.plugins.film.film import search_url,search_film,search_info
 
 __plugin_name__ = '电影'
 __plugin_usage__ = r'''
@@ -30,8 +26,8 @@ async def film(session: CommandSession):
     # 从会话状态（session.state）中获取图片url（url），如果当前不存在，则询问用户
     name = session.get('name', prompt='你查找什么电影？')
 
-    weather_report = await get_weather_of_city(name)
-    await session.send(weather_report)
+    film_info = search_film(name)
+    await session.send(film_info)
 
 
 @film.args_parser
