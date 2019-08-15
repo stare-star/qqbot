@@ -10,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 from awesome.plugins.short_url.short_url_api import shorten
 
+
 def search_url(name):
     n_url = name
     s_url = str('https://www.douban.com/search?q=') + str(n_url)
@@ -46,7 +47,7 @@ def search_info(url):
 
     sum_soup = soup.find(property="v:summary")
     sum = sum_soup.text.replace(" ", "")
-    url=shorten(url)
+    url = shorten(url)
     all = '网页链接：' + url + '\n' + '电影名称：' + film_soup.string + '\n' + '导演：' + d_name + '\n' + '主演：' + a_name + '\n' + '片长：' + time_soup.string + '\n' + '简介：' + sum + '\n'
     return all
 
