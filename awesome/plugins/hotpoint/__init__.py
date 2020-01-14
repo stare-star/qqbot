@@ -6,8 +6,29 @@
 @desc:
 '''
 #百度热点
+import datetime
+
+import pytz
 import requests
 from bs4 import BeautifulSoup
+from config import group_id
+import nonebot
+from aiocqhttp.exceptions import Error as CQHttpError
+@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='8', minute='0', second='00',timezone=pytz.timezone('Asia/Shanghai'))
+async def _():
+    nowhotp = "        当前热点          热度"
+    for num in range(0, 20):
+        nowhotp = nowhotp + "\n" + getnowhotp()[num]
+    global switch
+    switch = 1
+    try:
+        bot = nonebot.get_bot()
+        await bot.send_group_msg(group_id=group_id,
+                                 message=nowhotp)
+        bot.logger.info('发送热点')
+    except CQHttpError:
+        pass
+
 
 from nonebot import on_command, CommandSession
 switch = 0
@@ -93,6 +114,8 @@ from bs4 import BeautifulSoup
 
 from nonebot import on_command, CommandSession
 switch = 0
+
+
 @on_command("newhotpoint", aliases=("热点", "当前热点"), only_to_me=False)
 async def nowhot(session: CommandSession):
     nowhotp = "        当前热点          热度"

@@ -8,10 +8,9 @@ from config import user
 from awesome.plugins.daily_weather.weather_API import get_weather,tran
 
 #时差-8
-@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='14', minute='30', second='00')
+@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='10', minute='30', second='00',timezone=pytz.timezone('Asia/Shanghai'))
 async def _():
     bot = nonebot.get_bot()
-    now = datetime.now(pytz.timezone('Asia/Shanghai'))
     try:
         weather = get_weather()
         str_weather = "河海大学常州校区\n " + str(weather[0]['date']) + '   ' + tran[str(weather[3][0]['value'])] + '   ' + tran[
