@@ -5,7 +5,7 @@ import random
 __plugin_name__ = '掷骰子'
 __plugin_usage__ = r'''
 roll
-1-100
+1-6
 '''
 
 @on_command('roll', permission=GROUP | PRIVATE, only_to_me=False)
@@ -14,7 +14,7 @@ async def roll(session: CommandSession):
     nickname = session.ctx['sender']['nickname']
     randomresult = 0
     if data is None:  # 默认就1d100
-        randomresult = random.randint(1, 100)
+        randomresult = random.randint(1, 6)
         await session.finish(nickname + '投掷出: ' + str(randomresult))
     else:
         datas = str(data).split('d')

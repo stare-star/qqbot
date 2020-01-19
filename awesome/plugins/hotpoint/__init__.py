@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 from config import group_id
 import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
-@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='8', minute='0', second='00',timezone=pytz.timezone('Asia/Shanghai'))
+@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='18', minute='0', second='00',timezone=pytz.timezone('Asia/Shanghai'))
 async def _():
     nowhotp = "        当前热点          热度"
     for num in range(0, 20):

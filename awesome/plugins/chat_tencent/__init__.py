@@ -27,7 +27,6 @@ EXPR_DONT_UNDERSTAND = (
     '唔……等会再告诉你'
 )
 
-
 # 注册一个仅内部使用的命令，不需要 aliases
 @on_command('txchat')
 async def txchat(session: CommandSession):

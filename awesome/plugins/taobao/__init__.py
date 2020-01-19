@@ -7,7 +7,6 @@
 '''
 
 
-# # -*- coding: utf-8 -*-
 # import top.api
 #
 # req=top.api.TbkTpwdCreateRequest(url,port)

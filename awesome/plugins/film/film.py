@@ -59,6 +59,6 @@ def search_film(name):
 
 
 if __name__ == '__main__':
-    name = '战狼'
+    name = '战狼2'
     al = search_film(name)
     print(al)

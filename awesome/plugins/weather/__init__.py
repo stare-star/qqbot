@@ -18,13 +18,13 @@ async def weather(session: CommandSession):
 @weather.args_parser
 async def _(session: CommandSession):
     stripped_arg = session.current_arg_text.split()
-
     if session.is_first_run:
         if stripped_arg:
             session.state['city'] = stripped_arg
         return
     if not stripped_arg:
         session.pause('要查询的城市名称不能为空呢，请重新输入')
+
 
     session.state[session.current_key] = stripped_arg
 
@@ -35,6 +35,9 @@ async def get_weather_of_city(city: str):
         list = weaList(data)
         return f'{list}'
     return f'{data}'
+
+
+
 
 
 @on_natural_language(keywords={'天气'})

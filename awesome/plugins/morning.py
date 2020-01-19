@@ -6,6 +6,7 @@
 @desc:
 '''
 import nonebot
+import pytz
 
 from awesome.plugins.oneyan import getone
 from config import group_id
@@ -19,19 +20,16 @@ import requests
 from nonebot import CommandSession, on_command
 
 
-
-
-
-@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='0', minute='0', second='00')
+@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='8', minute='00', second='00', timezone=pytz.timezone('Asia/Shanghai'))
 async def morning():
     """ 早安
     """
     hello_str = get_message()
-    yan=getone()
-    out=hello_str+'\n\n'+yan
+    yan = getone()
+    out = hello_str + '\n\n' + yan
     bot = nonebot.get_bot()
     await bot.send_group_msg(group_id=group_id,
-                                 message=out)
+                             message=out)
     bot.logger.info('发送早安信息')
 
 

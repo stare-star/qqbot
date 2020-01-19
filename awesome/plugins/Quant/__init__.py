@@ -46,7 +46,7 @@ def get_message():
     str_data=''
     if res['code'] == 0:
 
-        str_data =res['name']+':'+res['gszzl']+'\n     '+res['gztime']
+        str_data =res['name']+':\n'+res['gszzl']+'\n                     '+res['gztime']
     else:
         str_data += '好像没法获得基金信息了，嘤嘤嘤'
 

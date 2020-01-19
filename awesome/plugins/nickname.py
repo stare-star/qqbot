@@ -14,7 +14,7 @@ import random
 
 
 
-@on_command('诺诺', only_to_me=False)
+@on_command('星星', only_to_me=False)
 async def one(session: CommandSession):
     id1 = random.randint(1, 208)
     id2 = random.randint(128513, 128613)
