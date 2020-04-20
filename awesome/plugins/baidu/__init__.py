@@ -14,7 +14,7 @@ __plugin_usage__ = r"""
 
 import requests
 from nonebot import CommandSession, on_command
-from awesome.plugins.short_url import shorten
+from awesome.plugins.short_url import shorten_lyx
 
 
 @on_command('baidu', aliases={'bd', '百度'}, only_to_me=False)
@@ -22,7 +22,7 @@ async def baidu(session: CommandSession):
     try:
         q = session.get('q', prompt='请输入关键词')
         output = getUrl(q)
-        short_url_ = shorten(output)
+        short_url_ = shorten_lyx(output)
         await session.send(short_url_)
     except:
         await session.send('失败了~>_<~')

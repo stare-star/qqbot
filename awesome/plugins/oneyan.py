@@ -6,18 +6,19 @@
 @desc:
 '''
 
-
 import json
 import re
 
 import requests
 from nonebot import CommandSession, on_command
-api="https://v1.hitokoto.cn/"
+
+api = "https://v1.hitokoto.cn/"
+
 
 @on_command('one', only_to_me=False)
 async def one(session: CommandSession):
     try:
-        output=getone()
+        output = getone()
         # 去掉最后一个\n
         await session.send(output)
     except:

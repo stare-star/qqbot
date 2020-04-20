@@ -20,7 +20,8 @@ import requests
 from nonebot import CommandSession, on_command
 
 
-@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='8', minute='00', second='00', timezone=pytz.timezone('Asia/Shanghai'))
+@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='8', minute='00', second='00',
+                                 timezone=pytz.timezone('Asia/Shanghai'))
 async def morning():
     """ 早安
     """
@@ -33,7 +34,8 @@ async def morning():
     bot.logger.info('发送早安信息')
 
 
-TEXTS = ['早上好呀~>_<~', '大家早上好呀！', '朋友们早上好！']
+TEXTS = ['早上好呀~>_<~', '啦啦啦，我来了', '想我了吗', '起床了吗', '一日之计在于晨', '大家早上好呀！', '朋友们早上好！', '起床啦!!', '小懒猪们，起床了！！！', '在吗',
+         '太阳当空照！！！']
 
 
 def get_message():

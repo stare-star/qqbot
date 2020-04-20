@@ -50,5 +50,6 @@ async def txchat(session: CommandSession):
 async def _(session: NLPSession):
     # 以置信度 60.0 返回 tuling 命令
     # 确保任何消息都在且仅在其它自然语言处理器无法理解的时候使用 tuling 命令
+
     return IntentCommand(60.0, 'txchat', args={'message': session.msg_text})
 

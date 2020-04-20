@@ -15,7 +15,7 @@ from config import group_id
 """
 
 
-@nonebot.scheduler.scheduled_job("cron", day_of_week='1-5', hour='14', minute='20', second='00',timezone=pytz.timezone('Asia/Shanghai'))
+@nonebot.scheduler.scheduled_job("cron", day_of_week='*', hour='14', minute='20', second='00',timezone=pytz.timezone('Asia/Shanghai'))
 async def fund():
     """ 基金
     """

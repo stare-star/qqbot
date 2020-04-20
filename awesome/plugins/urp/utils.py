@@ -94,7 +94,7 @@ def download_img(name, session, cookies):
 
 
 # async
-def login(id, passwd):
+async def login(id, passwd):
     count = 1
     while True:
         session = requests.session()  # 建立会话，保持会话信息，cookies
@@ -125,6 +125,7 @@ def login(id, passwd):
         # code = input('请输入验证码：')
         logindata = {'zjh': id,
                      'mm': passwd}
+
         logindata['v_yzm'] = code()
         print(logindata['v_yzm'])
         login_headers = {
@@ -158,19 +159,17 @@ def login(id, passwd):
     return session, cookies
 
 
-def getHtml(session, cookies):
+async def getHtml(session, cookies):
     # download_img('1.jpg',session,cookies)
-
     url_cj_this = 'http://urp.luyangxing.com/bxqcjcxAction.do'
     link_176241cj = 'http://jwurp.hhuc.edu.cn/gradeLnAllAction.do?type=ln&oper=fainfo&fajhh=1240'  # 成绩
     link_186231cj = "http://jwurp.hhuc.edu.cn/gradeLnAllAction.do?type=ln&oper=fainfo&fajhh=1494"  # 18级成绩
     # http://jwurp.hhuc.edu.cn/xjInfoAction.do?oper=xjxx  信息
     # http://jwurp.hhuc.edu.cn/gradeLnAllAction.do?type=ln&oper=qb
-
     Student_link = 'http://jwurp.hhuc.edu.cn/xjInfoAction.do?oper=xjxx'
     Photo_link = 'http: // jwurp.hhuc.edu.cn / xjInfoAction.do?oper = img '
-    Headers = {
 
+    Headers = {
         'Cookie': cookies,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'
     }
@@ -232,6 +231,8 @@ from awesome.plugins.urp.course import add_info
 #                  course_list[5], course_list[6])
 #
 
+
+
 def parse(html):
     soup = BeautifulSoup(html, 'lxml')
     re = soup.find_all('table', class_='titleTop2')
@@ -243,12 +244,7 @@ def parse(html):
         print(title.text)
 
     lines = re[0].find_all(class_='odd')  # 成绩表
-    print(len(lines))
-    cells = lines[0].find_all('td')
-
-    # for cell in cells:
-    #     print(cell.text)
-    res = []
+    res=[]
     for line in lines:
         cells = line.find_all('td')
         course_list = []
@@ -257,28 +253,29 @@ def parse(html):
         course_list.append(cells[2].text.strip())
         course_list.append(cells[4].text.strip())
         course_list.append(cells[5].text.strip())
-        course_list.append(cells[6].text.strip())
+        course_list.append(cells[9].text.strip())
 
         res.append(course_list)
 
     return res
 
 
-# if __name__ == '__main__':
-#     record('demo.html')
-#     print(52)
-
 
 if __name__ == '__main__':
     # id = 1862310211
     # passwd = "zyn20001228"
     # search(id, passwd)
-    id = 1762410319
-    passwd = "1dasds57sxaxasc"
-    seesion, cookies =  login(id, passwd)
-    getHtml(seesion, cookies)
-#     print(parse('demo.html'))
+    # id = 1762410319
+    # passwd = "1dasds57sxaxasc"
+    # seesion, cookies =  login(id, passwd)
+    # getHtml(seesion, cookies)
 
+
+
+    c=parse('bxqcjcx.html')
+    for i in c:
+        print(i[2])
+        print(i[9])
 
 # for i in range(40):
 #     work(id)

@@ -59,5 +59,7 @@ def parse_bk(html):
     return res
 
 if __name__ == '__main__':
-    print(record('demo.html'))
+    c=parse('bxqcjcx.html')
     print(502)
+    print(c[9][2])
+    print(c[9][9])

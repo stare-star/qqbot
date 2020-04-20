@@ -22,9 +22,9 @@ async def urp(session: CommandSession):
     course = session.state.get('course')
     await session.send("正在查询中，请稍候~")
     # 查询
-    s, cookies = await login(id, passwd)
+    sess, cookies = await login(id, passwd)
 
-    code, html = await getHtml(s, cookies)
+    code, html = await getHtml(sess, cookies)
     if code == 200:
 
         res = parse(html)
@@ -38,12 +38,13 @@ async def urp(session: CommandSession):
                     r = course + "\t" + str(i[3])
                     break
         # 向用户发送结果
+        print(res_format)
         await session.send(res_format)
 
         if course:
             for i in res:
                 if i[0] == course:
-                    r = course + "\t" + str(i[1])
+                    r = course + "\t" + str(i[3])
                     await session.send(str(r))
                     break
     if code == 404:
@@ -62,9 +63,6 @@ async def _(session: CommandSession):
 
     if session.is_first_run:
         # 该命令第一次运行（第一次进入命令会话）
-        print(1111111111111111111111111111)
-        print(1111111111111111111111111111)
-        print(stripped_arg, "000000000000000000")
 
         if stripped_arg:
             # 第一次运行参数不为空，意味着用户直接将城市名跟在命令名后面，作为参数传入
@@ -85,7 +83,6 @@ async def _(session: CommandSession):
         return
 
     if not session.is_first_run:
-        print(2222222222222222222222222222)
         print(stripped_arg)
 
         if not stripped_arg:
@@ -107,8 +104,8 @@ async def monitor():
     """
     id = '1762410319'
     pd = '142857'
-    s, c = login(id, pd)
-    c, html = getHtml(s, c)
+    s, c = await login(id, pd)
+    c, html = await getHtml(s, c)
     res = parse(html)
     res_format = ''
     for i in res:
@@ -142,8 +139,8 @@ def load(filename):
 if __name__ == '__main__':
     id = '1762410319'
     pd = '142857'
-    s, c = login(id, pd)
-    c, html = getHtml(s, c)
+    sess, cookies = login(id, pd)
+    c, html = getHtml(sess, cookies)
     res = parse(html)
     res_format = ''
     for i in res:
